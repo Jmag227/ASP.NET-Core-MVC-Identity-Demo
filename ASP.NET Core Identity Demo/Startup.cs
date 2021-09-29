@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ASP.NET_Core_Identity_Demo.IdentityPolicy;
+using Identity.IdentityPolicy;
 
 namespace ASP.NET_Core_Identity_Demo
 {
@@ -22,6 +23,7 @@ namespace ASP.NET_Core_Identity_Demo
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IPasswordValidator<AppUser>, CustomPasswordPolicy>();
+            services.AddTransient<IUserValidator<AppUser>, CustomUsernameEmailPolicy>();
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
 
