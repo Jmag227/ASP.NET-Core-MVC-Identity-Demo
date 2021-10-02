@@ -1,4 +1,5 @@
 ﻿using ASP.NET_Core_Identity_Demo.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -110,5 +111,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
                 ModelState.AddModelError("", "User Not Found");
             return View("Index", userManager.Users);
         }
+
+        
     }
 }
