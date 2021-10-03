@@ -54,6 +54,12 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return View(login);
         }
 
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
 
     }
 }

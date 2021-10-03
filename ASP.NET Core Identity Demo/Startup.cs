@@ -7,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ASP.NET_Core_Identity_Demo.IdentityPolicy;
+using System;
 
 namespace ASP.NET_Core_Identity_Demo
 {
@@ -38,6 +39,13 @@ namespace ASP.NET_Core_Identity_Demo
                 opts.Password.RequireLowercase = false;
                 opts.Password.RequireUppercase = true;
                 opts.Password.RequireDigit = true;
+            });
+
+            services.ConfigureApplicationCookie(options =>
+            {
+                options.Cookie.Name = ".AspNetCore.Identity.Application";
+                options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
+                options.SlidingExpiration = true;
             });
 
             services.AddControllersWithViews();
