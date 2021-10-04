@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ASP.NET_Core_Identity_Demo.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
-using ASP.NET_Core_Identity_Demo.Models;
+using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
- 
-namespace Identity.Controllers
+
+namespace ASP.NET_Core_Identity_Demo.Controllers
 {
     [Authorize]
     public class AccountController : Controller
@@ -55,5 +58,13 @@ namespace Identity.Controllers
             }
             return View(login);
         }
+
+        public async Task<IActionResult> Logout()
+        {
+            await signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
+        }
+
+
     }
 }
