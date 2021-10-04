@@ -21,13 +21,13 @@ namespace ASP.NET_Core_Identity_Demo.IdentityPolicy
                 });
             }
 
-            if (!user.Email.ToLower().EndsWith("@yahoo.com"))
-            {
-                errors.Add(new IdentityError
-                {
-                    Description = "Only yahoo.com email addresses are allowed"
-                });
-            }
+            //if (!user.Email.ToLower().EndsWith("@yahoo.com"))
+            //{
+            //    errors.Add(new IdentityError
+            //    {
+            //        Description = "Only yahoo.com email addresses are allowed"
+            //    });
+            //}
 
             return errors.Count == 0 ? IdentityResult.Success : IdentityResult.Failed(errors.ToArray());
         }

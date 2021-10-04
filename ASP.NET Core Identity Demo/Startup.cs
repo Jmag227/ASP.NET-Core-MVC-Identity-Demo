@@ -40,6 +40,8 @@ namespace ASP.NET_Core_Identity_Demo
                 opts.Password.RequireDigit = true;
             });
 
+            services.ConfigureApplicationCookie(opts => opts.LoginPath = "/Authenticate/Login");
+
             services.AddControllersWithViews();
         }
 
