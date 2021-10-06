@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using ASP.NET_Core_Identity_Demo.IdentityPolicy;
 using System;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ASP.NET_Core_Identity_Demo
 {
@@ -46,6 +47,29 @@ namespace ASP.NET_Core_Identity_Demo
                 options.Cookie.Name = ".AspNetCore.Identity.Application";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                 options.SlidingExpiration = true;
+            });
+
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("AspManager", policy => {
+                    policy.RequireRole("Manager");
+                    policy.RequireClaim("Coding-Skill", "ASP.NET Core MVC");
+                });
+            });
+
+            services.AddTransient<IAuthorizationHandler, AllowUsersHandler>();
+            services.AddAuthorization(opts => {
+                opts.AddPolicy("AllowTom", policy => {
+                    policy.AddRequirements(new AllowUserPolicy("tom"));
+                });
+            });
+
+            services.AddTransient<IAuthorizationHandler, AllowPrivateHandler>();
+            services.AddAuthorization(opts =>
+            {
+                opts.AddPolicy("PrivateAccess", policy =>
+                {
+                    policy.AddRequirements(new AllowPrivatePolicy());
+                });
             });
 
             services.AddControllersWithViews();
