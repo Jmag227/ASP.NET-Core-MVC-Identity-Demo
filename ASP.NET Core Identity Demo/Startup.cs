@@ -14,7 +14,7 @@ namespace ASP.NET_Core_Identity_Demo
 {
     public class Startup
     {
-        
+
         public Startup(IConfiguration configuration) => Configuration = configuration;
 
         public IConfiguration Configuration { get; }
@@ -32,7 +32,8 @@ namespace ASP.NET_Core_Identity_Demo
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(opts => {
+            services.Configure<IdentityOptions>(opts =>
+            {
                 opts.User.RequireUniqueEmail = true;
                 opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
                 opts.Password.RequiredLength = 8;
@@ -49,16 +50,20 @@ namespace ASP.NET_Core_Identity_Demo
                 options.SlidingExpiration = true;
             });
 
-            services.AddAuthorization(opts => {
-                opts.AddPolicy("AspManager", policy => {
+            services.AddAuthorization(opts =>
+            {
+                opts.AddPolicy("AspManager", policy =>
+                {
                     policy.RequireRole("Manager");
                     policy.RequireClaim("Coding-Skill", "ASP.NET Core MVC");
                 });
             });
 
             services.AddTransient<IAuthorizationHandler, AllowUsersHandler>();
-            services.AddAuthorization(opts => {
-                opts.AddPolicy("AllowTom", policy => {
+            services.AddAuthorization(opts =>
+            {
+                opts.AddPolicy("AllowTom", policy =>
+                {
                     policy.AddRequirements(new AllowUserPolicy("tom"));
                 });
             });
@@ -71,6 +76,14 @@ namespace ASP.NET_Core_Identity_Demo
                     policy.AddRequirements(new AllowPrivatePolicy());
                 });
             });
+
+            services.AddAuthentication()
+                .AddGoogle(opts =>
+                {
+                    opts.ClientId = "717469225962-3vk00r8tglnbts1cgc4j1afqb358o8nj.apps.googleusercontent.com";
+                    opts.ClientSecret = "babQzWPLGwfOQVi0EYR-7Fbb";
+                    opts.SignInScheme = IdentityConstants.ExternalScheme;
+                });
 
             services.AddControllersWithViews();
         }
