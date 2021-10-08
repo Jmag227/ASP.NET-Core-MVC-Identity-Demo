@@ -9,6 +9,8 @@ using Microsoft.AspNetCore.Identity;
 using ASP.NET_Core_Identity_Demo.IdentityPolicy;
 using System;
 using Microsoft.AspNetCore.Authorization;
+using System.Data;
+using MySql.Data.MySqlClient;
 
 namespace ASP.NET_Core_Identity_Demo
 {
@@ -25,8 +27,19 @@ namespace ASP.NET_Core_Identity_Demo
         {
             services.AddTransient<IPasswordValidator<AppUser>, CustomPasswordPolicy>();
             services.AddTransient<IUserValidator<AppUser>, CustomUsernameEmailPolicy>();
+            services.AddTransient<IProductRepository, ProductRepository>();
+
+            services.AddScoped<IDbConnection>((s) =>
+            {
+                IDbConnection conn = new MySqlConnection(Configuration.GetConnectionString("bestbuy"));
+                conn.Open();
+                return conn;
+            });
+
             services.AddDbContext<AppIdentityDbContext>(options =>
                 options.UseSqlServer(Configuration["ConnectionStrings:DefaultConnection"]));
+
+
 
             services.AddIdentity<AppUser, IdentityRole>()
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
