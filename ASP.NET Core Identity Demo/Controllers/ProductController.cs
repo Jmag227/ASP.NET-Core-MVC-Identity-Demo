@@ -17,10 +17,26 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         }
 
         // GET: /<controller>/
-        public IActionResult Index()
+        public IActionResult Index(string sortOrder, string searchString)
         {
+            ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewData["CurrentFilter"] = searchString;
+
             var products = _repo.GetAllProducts();
 
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                products = products.Where(s => s.Name.Contains(searchString));
+            }
+
+            products = sortOrder switch
+            {
+                "name_desc" => products.OrderByDescending(s => s.Name),
+                "Price" => products.OrderBy(s => s.Price),
+                "price_desc" => products.OrderByDescending(s => s.Price),
+                _ => products.OrderBy(s => s.ProductID),
+            };
             return View(products);
         }
 
