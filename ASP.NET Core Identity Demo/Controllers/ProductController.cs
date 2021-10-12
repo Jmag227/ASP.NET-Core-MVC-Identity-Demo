@@ -17,7 +17,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             _repo = repo;
         }
                 
-        [Authorize]
+        
         public IActionResult Index(string sortOrder, string searchString)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -42,6 +42,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return View(products);
         }
 
+        [Authorize]
         public IActionResult ViewProduct(int id)
         {
             var product = _repo.GetProduct(id);
@@ -49,6 +50,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return View(product);
         }
 
+        [Authorize]
         public IActionResult UpdateProduct(int id)
         {
             Product prod = _repo.GetProduct(id);
@@ -63,6 +65,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return View(prod);
         }
 
+        [Authorize]
         public IActionResult UpdateProductToDatabase(Product product)
         {
             _repo.UpdateProduct(product);
@@ -70,6 +73,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return RedirectToAction("ViewProduct", new { id = product.ProductID });
         }
 
+        [Authorize]
         public IActionResult InsertProduct()
         {
             var prod = _repo.AssignCategory();
@@ -77,6 +81,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return View(prod);
         }
 
+        [Authorize]
         public IActionResult InsertProductToDatabase(Product productToInsert)
         {
             _repo.InsertProduct(productToInsert);
@@ -84,6 +89,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return RedirectToAction("Index");
         }
 
+        [Authorize]
         public IActionResult DeleteProduct(Product product)
         {
             _repo.DeleteProduct(product);
