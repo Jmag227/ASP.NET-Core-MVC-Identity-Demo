@@ -1,4 +1,5 @@
 ﻿using ASP.NET_Core_Identity_Demo.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -15,8 +16,8 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         {
             _repo = repo;
         }
-
-        // GET: /<controller>/
+                
+        [Authorize]
         public IActionResult Index(string sortOrder, string searchString)
         {
             ViewData["NameSortParm"] = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
@@ -32,6 +33,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
 
             products = sortOrder switch
             {
+                "" => products.OrderBy(s => s.Name),
                 "name_desc" => products.OrderByDescending(s => s.Name),
                 "Price" => products.OrderBy(s => s.Price),
                 "price_desc" => products.OrderByDescending(s => s.Price),
