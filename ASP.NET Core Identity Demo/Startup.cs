@@ -93,8 +93,8 @@ namespace ASP.NET_Core_Identity_Demo
             services.AddAuthentication()
                 .AddGoogle(opts =>
                 {
-                    opts.ClientId = "717469225962-3vk00r8tglnbts1cgc4j1afqb358o8nj.apps.googleusercontent.com";
-                    opts.ClientSecret = "babQzWPLGwfOQVi0EYR-7Fbb";
+                    opts.ClientId = ""; // Empty
+                    opts.ClientSecret = ""; // Empty
                     opts.SignInScheme = IdentityConstants.ExternalScheme;
                 });
 
