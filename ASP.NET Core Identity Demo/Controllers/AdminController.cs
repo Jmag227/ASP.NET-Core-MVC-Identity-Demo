@@ -47,6 +47,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         }
 
         [HttpPost]
+        [Authorize]
         public async Task<IActionResult> Create(User user)
         {
             if (ModelState.IsValid)

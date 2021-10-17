@@ -90,13 +90,13 @@ namespace ASP.NET_Core_Identity_Demo
                 });
             });
 
-            services.AddAuthentication()
-                .AddGoogle(opts =>
-                {
-                    opts.ClientId = ""; // Empty
-                    opts.ClientSecret = ""; // Empty
-                    opts.SignInScheme = IdentityConstants.ExternalScheme;
-                });
+            //services.AddAuthentication()
+            //    .AddGoogle(opts =>
+            //    {
+            //        opts.ClientId = ""; // Empty
+            //        opts.ClientSecret = ""; // Empty
+            //        opts.SignInScheme = IdentityConstants.ExternalScheme;
+            //    });
 
             services.AddControllersWithViews();
         }
