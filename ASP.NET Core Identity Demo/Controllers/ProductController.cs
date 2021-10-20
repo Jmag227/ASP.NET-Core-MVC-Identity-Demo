@@ -20,8 +20,12 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         
         public IActionResult Index(string sortOrder, string searchString)
         {
-            ViewData["NameSortParm"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
-            ViewData["PriceSortParm"] = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "Name";
+            ViewData["IDSortParam"] = sortOrder == "ID" ? "id_desc" : "ID";
+            ViewData["PriceSortParam"] = sortOrder == "Price" ? "price_desc" : "Price";
+            ViewData["CategorySortParam"] = sortOrder == "CategoryID" ? "category-id_desc" : "CategoryID";
+            ViewData["OnSaleSortParam"] = sortOrder == "OnSale" ? "on-sale_desc" : "OnSale";
+            ViewData["StockLevelSortParam"] = sortOrder == "StockLevel" ? "stock-level_desc" : "StockLevel";
             ViewData["CurrentFilter"] = searchString;
 
             var products = _repo.GetAllProducts();
@@ -33,11 +37,19 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
 
             products = sortOrder switch
             {
-                "" => products.OrderBy(s => s.Name),
+                "ID" => products.OrderBy(s => s.ProductID),
+                "id_desc" => products.OrderByDescending(s => s.ProductID),
+                "Name" => products.OrderBy(s => s.Name),
                 "name_desc" => products.OrderByDescending(s => s.Name),
                 "Price" => products.OrderBy(s => s.Price),
                 "price_desc" => products.OrderByDescending(s => s.Price),
-                _ => products.OrderBy(s => s.ProductID),
+                "CategoryID" => products.OrderBy(s => s.CategoryID),
+                "category-id_desc" => products.OrderByDescending(s => s.CategoryID),
+                "OnSale" => products.OrderBy(s => s.OnSale),
+                "on-sale_desc" => products.OrderByDescending(s => s.OnSale),
+                "StockLevel" => products.OrderBy(s => s.StockLevel),
+                "stock-level_desc" => products.OrderByDescending(s => s.StockLevel),
+                _ => products.OrderBy(s => s.ProductID)
             };
             return View(products);
         }

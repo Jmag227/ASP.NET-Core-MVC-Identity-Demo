@@ -58,7 +58,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
                     Email = user.Email,
                     Country = user.Country,
                     Age = user.Age,
-                    Salary = user.Salary
+                    Salary = user.MonthlySalary
                 };
 
                 IdentityResult result = await userManager.CreateAsync(appUser, user.Password);
