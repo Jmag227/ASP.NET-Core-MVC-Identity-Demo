@@ -15,12 +15,11 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         public ProductController(IProductRepository repo)
         {
             _repo = repo;
-        }
-                
+        }                
         
         public IActionResult Index(string sortOrder, string searchString)
         {
-            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "Name";
+            ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
             ViewData["IDSortParam"] = sortOrder == "ID" ? "id_desc" : "ID";
             ViewData["PriceSortParam"] = sortOrder == "Price" ? "price_desc" : "Price";
             ViewData["CategorySortParam"] = sortOrder == "CategoryID" ? "category-id_desc" : "CategoryID";
@@ -49,7 +48,8 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
                 "on-sale_desc" => products.OrderByDescending(s => s.OnSale),
                 "StockLevel" => products.OrderBy(s => s.StockLevel),
                 "stock-level_desc" => products.OrderByDescending(s => s.StockLevel),
-                _ => products.OrderBy(s => s.ProductID)
+                "" => products.OrderBy(s => s.Name),
+                _ => products.OrderBy(s => s.Name)
             };
             return View(products);
         }
