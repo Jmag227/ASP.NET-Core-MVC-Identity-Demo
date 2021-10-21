@@ -23,6 +23,6 @@ namespace ASP.NET_Core_Identity_Demo.Models
         public int Age { get; set; }
 
         [Required]
-        public string Salary { get; set; }
+        public string MonthlySalary { get; set; }
     }
 }
