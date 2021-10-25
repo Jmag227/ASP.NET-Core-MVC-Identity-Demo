@@ -24,5 +24,10 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             string message = $"Welcome {user.UserName}!";
             return View((object)message);
         }
+
+        public IActionResult Sidebar()
+        {
+            return View();
+        }
     }
 }
