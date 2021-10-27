@@ -43,27 +43,36 @@ namespace ASP.NET_Core_Identity_Demo
                 .AddEntityFrameworkStores<AppIdentityDbContext>()
                 .AddDefaultTokenProviders();
 
-            services.Configure<IdentityOptions>(opts =>
+            services.Configure<IdentityOptions>(options =>
             {
-                opts.User.RequireUniqueEmail = true;
-                opts.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyz";
-                opts.Password.RequiredLength = 8;
-                opts.Password.RequireNonAlphanumeric = true;
-                opts.Password.RequireLowercase = false;
-                opts.Password.RequireUppercase = true;
-                opts.Password.RequireDigit = true;
+                // Password settings
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireUppercase = true;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequiredLength = 8;
+
+                // Lockout settings
+                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(5);
+                options.Lockout.MaxFailedAccessAttempts = 5;
+                options.Lockout.AllowedForNewUsers = true;
+
+                // User settings
+                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
             });
 
             services.ConfigureApplicationCookie(options =>
             {
+                options.Cookie.HttpOnly = true;
                 options.Cookie.Name = ".AspNetCore.Identity.Application";
                 options.ExpireTimeSpan = TimeSpan.FromMinutes(20);
                 options.SlidingExpiration = true;
             });
 
-            services.AddAuthorization(opts =>
+            services.AddAuthorization(options =>
             {
-                opts.AddPolicy("AspManager", policy =>
+                options.AddPolicy("AspManager", policy =>
                 {
                     policy.RequireRole("Manager");
                     policy.RequireClaim("Coding-Skill", "ASP.NET Core MVC");
@@ -71,18 +80,18 @@ namespace ASP.NET_Core_Identity_Demo
             });
 
             services.AddTransient<IAuthorizationHandler, AllowUsersHandler>();
-            services.AddAuthorization(opts =>
+            services.AddAuthorization(options =>
             {
-                opts.AddPolicy("AllowTom", policy =>
+                options.AddPolicy("AllowTom", policy =>
                 {
                     policy.AddRequirements(new AllowUserPolicy("tom"));
                 });
             });
 
             services.AddTransient<IAuthorizationHandler, AllowPrivateHandler>();
-            services.AddAuthorization(opts =>
+            services.AddAuthorization(options =>
             {
-                opts.AddPolicy("PrivateAccess", policy =>
+                options.AddPolicy("PrivateAccess", policy =>
                 {
                     policy.AddRequirements(new AllowPrivatePolicy());
                 });
