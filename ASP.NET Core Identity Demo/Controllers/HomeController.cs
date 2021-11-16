@@ -29,5 +29,10 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         {
             return View();
         }
+
+        public IActionResult LayoutsDemo()
+        {
+            return View();
+        }
     }
 }
