@@ -1,0 +1,13 @@
+﻿<div class="container">
+    @using (Html.BeginForm("FileUpload", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+    {
+        <div class="row">
+            <div class="form-group col-md-6">
+                <input type="file" class="form-control" name="formFile" />
+            </div> 
+            <div class="form-group col-md-6">
+                <input type="submit" name="filesubmit" value="Upload" />
+            </div>
+        </div>
+    }
+</div>

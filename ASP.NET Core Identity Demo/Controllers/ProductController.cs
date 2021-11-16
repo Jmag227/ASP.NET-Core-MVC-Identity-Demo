@@ -1,8 +1,10 @@
 ﻿using ASP.NET_Core_Identity_Demo.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -11,12 +13,37 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
     public class ProductController : Controller
     {
         private readonly IProductRepository _repo;
+        private readonly string _imgs = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", "imgs");
 
         public ProductController(IProductRepository repo)
         {
             _repo = repo;
-        }                
-        
+        }
+
+        [Authorize]
+        public IActionResult FileUpload()
+        {
+            return View();
+        }
+
+        [Authorize]
+        [HttpPost]
+        public async Task<IActionResult> FileUpload(IFormFile formFile)
+        {
+
+            
+            if (formFile != null)
+            {
+                var path = Path.Combine(_imgs, Guid.NewGuid() + Path.GetExtension(formFile.FileName));
+
+                using var stream = new FileStream(path, FileMode.Create);
+                await formFile.CopyToAsync(stream);
+
+                return RedirectToAction("FileUpload");
+            }
+            return View();
+        }
+
         public IActionResult Index(string sortOrder, string searchString)
         {
             ViewData["NameSortParam"] = string.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
