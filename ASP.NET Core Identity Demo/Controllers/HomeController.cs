@@ -21,8 +21,8 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         public async Task<IActionResult> Index()
         {
             AppUser user = await userManager.GetUserAsync(HttpContext.User);
-            string message = $"Welcome {user.UserName}!";
-            return View((object)message);
+            //string message = $"Welcome {user.UserName}!";
+            return View(user);
         }
 
         public IActionResult Sidebar()
