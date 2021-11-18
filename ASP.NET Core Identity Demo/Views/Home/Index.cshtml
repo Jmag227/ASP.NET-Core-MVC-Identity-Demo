@@ -34,23 +34,28 @@
             margin-top: 80px;
             margin-right: 150px;
         }
-
-
     </style>
-    <title>Title</title>
+    <title>ASP.NET Core MVC Identity Demo</title>
 </head>
 <body>
-    <div class="logout-button">
-        @if (User?.Identity?.IsAuthenticated ?? false)
-        {
-            <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
-        }
-    </div>
-    <div class="container-fluid">
-        <div class="border border-primary">
-            <h1 class="welcome">Welcome: @Model.UserName</h1>
+    <div class="wrapper">
+        <div class="logout-button">
+            @if (User?.Identity?.IsAuthenticated ?? false)
+            {
+                <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+            }
+        </div>
+        <div class="container-fluid">
+            <div class="border border-primary">
+                <h1>Welcome: @Model.UserName</h1>
+            </div>
+        </div>
+        <div class="bestbuy-logo">
+            <img src="~/imgs/best-buy-png-logo-3002.png" />
+            <a href="https://www.freepnglogos.com/pics/best-buy-png-logo">Best Buy Logo from freepnglogos.com</a>
         </div>
     </div>
+
 </body>
 </html>
 
