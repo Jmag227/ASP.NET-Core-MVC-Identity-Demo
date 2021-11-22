@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="~/css/site.css" />
     <style>
         body {
-            background-image: url("/imgs/digital-warehouse.jpg");
+            background-image: url("/imgs/warehouse-concept-art.jpg");
             background-repeat: no-repeat;
             background-attachment: fixed;
             background-position: center;
@@ -27,33 +27,28 @@
             border: 3px solid #111111;
         }
 
-        .logout-button {
-            top: 0;
-            right: 0;
-            position: fixed;
-            margin-top: 80px;
-            margin-right: 150px;
+        .logout {
+            display: flex;
+            align-items: center;
         }
     </style>
     <title>ASP.NET Core MVC Identity Demo</title>
 </head>
 <body>
-    <div class="wrapper">
-        <div class="logout-button">
-            @if (User?.Identity?.IsAuthenticated ?? false)
-            {
-                <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
-            }
-        </div>
-        <div class="container-fluid">
-            <div class="border border-primary">
-                <h1>Welcome: @Model.UserName</h1>
+    <div class="jumbotron">
+        <div class="logout border border-primary">
+            <h1>Welcome: @Model.UserName</h1><span>
+                @if (User?.Identity?.IsAuthenticated ?? false)
+                {
+                    <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+                }
+            </span>
+            <div class="bestbuy-logo">
+                <img src="~/imgs/best-buy-png-logo-3002.png" style="width: 150px; height: 125px;" />
+                <p>The Mock BestBuy Warehouse Portal</p>
             </div>
         </div>
-        <div class="bestbuy-logo">
-            <img src="~/imgs/best-buy-png-logo-3002.png" />
-            <a href="https://www.freepnglogos.com/pics/best-buy-png-logo">Best Buy Logo from freepnglogos.com</a>
-        </div>
+        
     </div>
 
 </body>
