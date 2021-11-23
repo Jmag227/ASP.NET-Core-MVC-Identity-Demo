@@ -30,25 +30,47 @@
         .logout {
             display: flex;
             align-items: center;
+            justify-content: space-between;
+        }
+
+        .hub{
+
         }
     </style>
     <title>ASP.NET Core MVC Identity Demo</title>
 </head>
 <body>
     <div class="jumbotron">
-        <div class="logout border border-primary">
+        <div class="logout">
             <h1>Welcome: @Model.UserName</h1><span>
                 @if (User?.Identity?.IsAuthenticated ?? false)
                 {
                     <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
                 }
             </span>
-            <div class="bestbuy-logo">
-                <img src="~/imgs/best-buy-png-logo-3002.png" style="width: 150px; height: 125px;" />
-                <p>The Mock BestBuy Warehouse Portal</p>
-            </div>
+            @*<div class="bestbuy-logo">
+                    <img src="~/imgs/best-buy-png-logo-3002.png" style="width: 150px; height: 125px;" />
+                    <p>The Mock BestBuy Warehouse Portal</p>
+                </div>*@
         </div>
-        
+
+    </div>
+
+    <div class="card" style="width: 25vw;">
+        <a asp-controller="Role" asp-action="Index">
+            <img src="https://img.icons8.com/fluency/48/000000/admin-settings-male.png" />
+            <div class="card-body">
+                <h3>Roles</h3>
+            </div>
+        </a>
+    </div>
+    <div class="card" style="width: 25vw;">
+        <a asp-controller="Admin" asp-action="Index">
+            <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-users-cyber-security-kiranshastry-gradient-kiranshastry-1.png" />
+            <div class="card-body">
+                <h3>Users</h3>
+            </div>
+        </a>
     </div>
 
 </body>
