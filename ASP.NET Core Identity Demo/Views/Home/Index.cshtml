@@ -33,8 +33,11 @@
             justify-content: space-between;
         }
 
-        .hub{
-
+        .cards {
+            width: fit-content;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
         }
     </style>
     <title>ASP.NET Core MVC Identity Demo</title>
@@ -56,22 +59,48 @@
 
     </div>
 
-    <div class="card" style="width: 25vw;">
-        <a asp-controller="Role" asp-action="Index">
-            <img src="https://img.icons8.com/fluency/48/000000/admin-settings-male.png" />
-            <div class="card-body">
-                <h3>Roles</h3>
-            </div>
-        </a>
+    <div class="cards">
+        <table class="border border-success">
+            <tr>
+                <th>Admin</th>
+                <th>Claims</th>
+                <th>Role</th>
+            </tr>
+            <tr>
+                <td>
+                    <div class="card">
+                        <a asp-controller="Admin" asp-action="Index">
+                            <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-users-cyber-security-kiranshastry-gradient-kiranshastry-1.png" />
+                            <div class="card-body">
+                                <h3>Admin Index Page</h3>
+                            </div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">
+                        <a asp-controller="Claims" asp-action="Index">
+                            <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-users-cyber-security-kiranshastry-gradient-kiranshastry-1.png" />
+                            <div class="card-body">
+                                <h3>Claims Index Page</h3>
+                            </div>
+                        </a>
+                    </div>
+                </td>
+                <td>
+                    <div class="card">
+                        <a asp-controller="Role" asp-action="Index">
+                            <img src="https://img.icons8.com/fluency/48/000000/admin-settings-male.png" />
+                            <div class="card-body">
+                                <h3>Roles Index Page</h3>
+                            </div>
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
-    <div class="card" style="width: 25vw;">
-        <a asp-controller="Admin" asp-action="Index">
-            <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-users-cyber-security-kiranshastry-gradient-kiranshastry-1.png" />
-            <div class="card-body">
-                <h3>Users</h3>
-            </div>
-        </a>
-    </div>
+
 
 </body>
 </html>

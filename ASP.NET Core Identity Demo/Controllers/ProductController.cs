@@ -29,9 +29,7 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
         [Authorize]
         [HttpPost]
         public async Task<IActionResult> FileUpload(IFormFile formFile)
-        {
-
-            
+        {            
             if (formFile != null)
             {
                 var path = Path.Combine(_imgs, Guid.NewGuid() + Path.GetExtension(formFile.FileName));
