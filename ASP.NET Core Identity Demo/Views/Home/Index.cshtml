@@ -1,107 +1,91 @@
 ﻿@model AppUser
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
-    <style>
-        body {
-            background-image: url("/imgs/warehouse-concept-art.jpg");
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-            background-size: 100%;
-            height: 100vh;
-        }
+<section class="m-2">
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla malesuada accumsan felis non cursus. Quisque.</p>
+</section>
 
-        .login {
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            -webkit-transform: translate(-50%, -50%);
-            transform: translate(-50%, -50%);
-            border: 3px solid #111111;
-        }
-
-        .logout {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .cards {
-            width: fit-content;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-    </style>
-    <title>ASP.NET Core MVC Identity Demo</title>
-</head>
-<body>
-    <div class="jumbotron">
-        <div class="logout">
-            <h1>Welcome: @Model.UserName</h1><span>
-                @if (User?.Identity?.IsAuthenticated ?? false)
-                {
-                    <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
-                }
-            </span>
-            @*<div class="bestbuy-logo">
-                    <img src="~/imgs/best-buy-png-logo-3002.png" style="width: 150px; height: 125px;" />
-                    <p>The Mock BestBuy Warehouse Portal</p>
-                </div>*@
-        </div>
-
+<div class="row row-cols-1 row-cols-md-2 g-4">
+    <div class="col">
+        <a asp-controller="Admin" asp-action="Index">
+            <div class="card text-blue bg-dark">
+                <img class="card-img-top" src="https://img.icons8.com/external-itim2101-blue-itim2101/64/000000/external-admin-network-technology-itim2101-blue-itim2101-1.png" />
+                <div class="card-body">
+                    <h5 class="card-title">Admin Users View</h5>
+                    <p class="card-text">
+                        Allows you to see all of the users stored in the IdentityDB
+                    </p>
+                </div>
+            </div>
+        </a>
     </div>
-
-    <div class="cards">
-        <table class="border border-success">
-            <tr>
-                <th>Admin</th>
-                <th>Claims</th>
-                <th>Role</th>
-            </tr>
-            <tr>
-                <td>
-                    <div class="card">
-                        <a asp-controller="Admin" asp-action="Index">
-                            <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-users-cyber-security-kiranshastry-gradient-kiranshastry-1.png" />
-                            <div class="card-body">
-                                <h3>Admin Index Page</h3>
-                            </div>
-                        </a>
-                    </div>
-                </td>
-                <td>
-                    <div class="card">
-                        <a asp-controller="Claims" asp-action="Index">
-                            <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-users-cyber-security-kiranshastry-gradient-kiranshastry-1.png" />
-                            <div class="card-body">
-                                <h3>Claims Index Page</h3>
-                            </div>
-                        </a>
-                    </div>
-                </td>
-                <td>
-                    <div class="card">
-                        <a asp-controller="Role" asp-action="Index">
-                            <img src="https://img.icons8.com/fluency/48/000000/admin-settings-male.png" />
-                            <div class="card-body">
-                                <h3>Roles Index Page</h3>
-                            </div>
-                        </a>
-                    </div>
-                </td>
-            </tr>
-        </table>
+    <div class="col">
+        <a asp-controller="Claims" asp-action="Index">
+            <div class="card text-blue bg-dark">
+                <img class="card-img-top" src="https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-users-due-diligence-icongeek26-outline-colour-icongeek26.png" />
+                <div class="card-body">
+                    <h5 class="card-title">Claims</h5>
+                    <p class="card-text">
+                        Allows you to see all of the claims associated with a particular user
+                    </p>
+                </div>
+            </div>
+        </a>
     </div>
+    <div class="col">
+        <a asp-controller="Role" asp-action="Index">
+            <div class="card text-blue bg-dark">
+                <img class="card-img-top" src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-users-cyber-security-kiranshastry-gradient-kiranshastry-1.png" />
+                <div class="card-body">
+                    <h5 class="card-title">All Roles</h5>
+                    <p class="card-text">
+                        Allows you to see all of the roles
+                    </p>
+                </div>
+            </div>
+        </a>
+    </div>
+</div>
 
+@*<div class="cards">
+    <table>
+        <tr>
+            <td>
+                <a asp-controller="Admin" asp-action="Index">
+                    <div class="card">
+                        <img src="https://img.icons8.com/external-itim2101-blue-itim2101/64/000000/external-admin-network-technology-itim2101-blue-itim2101-1.png" />
+                        <div class="card-body">
+                            <h3>Admin</h3>
+                        </div>
+                    </div>
+                </a>
+            </td>
+            <td>
+                <div class="card">
+                    <a asp-controller="Claims" asp-action="Index">
+                        <img src="https://img.icons8.com/external-icongeek26-outline-colour-icongeek26/64/000000/external-users-due-diligence-icongeek26-outline-colour-icongeek26.png" />
+                        <div class="card-body">
+                            <h3>Claims</h3>
+                        </div>
+                    </a>
+                </div>
+            </td>
+            <td>
+                <div class="card">
+                    <a asp-controller="Role" asp-action="Index">
+                        <div class="card-body">
+                            <img src="https://img.icons8.com/external-kiranshastry-gradient-kiranshastry/64/000000/external-users-cyber-security-kiranshastry-gradient-kiranshastry-1.png" />
+                            <h3>All Roles</h3>
+                        </div>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    </table>
+</div>
+*@
+<div>
+    <br />
+    <a href="https://icons8.com/icon/TLngp4XaOZxj/users">Users icon by Icons8</a>
+</div>
 
-</body>
-</html>
 

@@ -1,43 +1,50 @@
-﻿ <!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]ASP.NET Core MVC Identity Demo</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ASP.NET_Teacher_Demo_ConsoleUI</a>
+<body class="text-light bg-dark">
+    <div class="container text-light bg-dark">
+        <header>
+            <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-dark bg-dark box-shadow mb-3">
+                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">ASP.NET Core MVC Identity Demo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">                    
+                <div class="navbar-collapse collapse d-md-flex flex-md-row-reverse align-items-center justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="Index">Products</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Product" asp-action="FileUpload">Upload a file</a>
+                            <a class="nav-link" asp-area="" asp-controller="Product" asp-action="FileUpload">Upload a file</a>
+                        </li>
+                        <li>
+                            <span>
+                                @if (User?.Identity?.IsAuthenticated ?? false)
+                                {
+                                    <a asp-controller="Account" asp-action="Logout" class="btn btn-danger">Logout</a>
+                                }
+                            </span>
                         </li>
                     </ul>
                 </div>
-            </div>
-        </nav>
-    </header>
-    <div class="container">
+            </nav>
+        </header>
         <main role="main" class="pb-2">
             @RenderBody()
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="footer text-muted">
         <div class="container">
             &copy; 2020 - ASP.NET_Teacher_Demo_ConsoleUI - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
