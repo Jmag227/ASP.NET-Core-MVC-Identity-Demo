@@ -65,8 +65,9 @@ body {
     margin-bottom: 60px;
     min-height: 100%;
 }
-.footer {
-  position: absolute;
+
+footer {
+  position: fixed;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
