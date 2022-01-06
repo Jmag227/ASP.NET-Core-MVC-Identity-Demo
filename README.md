@@ -1,4 +1,4 @@
-# ASP.NET-Core-Identity-Demo
+# ASP.NET Core MVC Identity Demo
 
 ### An ASP.NET Core MVC web app that uses [IDentity](https://docs.microsoft.com/en-us/azure/active-directory/develop/) for authentication and [Dapper](https://github.com/DapperLib/Dapper) as the ORM.
 
