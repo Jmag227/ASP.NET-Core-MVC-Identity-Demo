@@ -25,6 +25,11 @@ namespace ASP.NET_Core_Identity_Demo.Controllers
             return View(user);
         }
 
+        public IActionResult Privacy()
+        {
+            return View();
+        }
+
         public IActionResult Sidebar()
         {
             return View();
